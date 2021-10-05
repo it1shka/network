@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital@1&display=swap');
+
+:root {
+  box-sizing: border-box;
+  --spec-color: #a15300;
+  --spec-light-color: #ff9d34;
+}
+
+::before, ::after, * {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  font-family: 'Balsamiq Sans', cursive;
+  font-size: calc(0.5vw + 0.5em);
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--spec-color);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:not(:hover) {
+  text-decoration: none;
+}
+
+.shadowed {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+/* HEADER */
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 0.25em 1em;
+  padding-left: 1.5em;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+.header > nav {
+  margin-left: auto;
+}
+
+.nav {
+  display: flex;
+  list-style-type: none;
+}
+
+.nav > li {
+  margin-right: 1.5em;
+  font-size: 1.2em;
+}
+
+.nav > li > a {
+  display: block;
+  padding: 0.5em 0.75em;
+}
+
+/* FOOTER */
+
+.footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px -1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+/* CONTAINER */
+
+.container {
+  width: 50%;
+  margin: 0 auto;
+}
+
+/* SECTION */
+
+.section {
+  padding: 1em 2em;
+  box-shadow:rgba(0, 0, 0, 0.1) 0px 0px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  border-radius: 0.75em;
+  margin-top: 1em;
+}
+
+.hovered {
+  transition: all .2s ease-in-out;
+}
+
+.hovered:hover {
+  transform: scale(1.05);
+  color: white;
+  background-color: var(--spec-light-color);
+}
+
+/* FORM | SUBPHRASE */
+
+.form {
+  position: relative;
+  padding: 3em 5em;
+}
+
+.form__subphrase {
+  margin: 0;
+  position: absolute;
+  bottom: 0.75em;
+  right: 0.75em;
+}
