@@ -16,6 +16,17 @@
     </p>
     <input type="submit" name="submit" value="Войти">
   </form>
+
+  <?php if(isset($_GET["error"])): ?>
+  <section class="section">
+  <?php
+    include_once "includes/errors.inc.php";
+    $error = get_error_desc($_GET["error"]);
+    echo $error;
+  ?>
+  </section>
+  <?php endif; ?>
+  
 </main>
 </div>
 

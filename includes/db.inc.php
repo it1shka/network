@@ -1,11 +1,11 @@
 <?php
 
-$host = "localhost";
-$user = "root";
-$password = "mysql";
+$db_host = "localhost";
+$db_user = "root";
+$db_password = "mysql";
 $database = "network";
 
-$conn = new mysqli($host, $user, $password, $database);
+$conn = new mysqli($db_host, $db_user, $db_password, $database);
 
 if($conn === false) {
   die("DB Connection Failed.");

@@ -27,7 +27,7 @@ if(isset($_POST["submit"])) {
 
   // finally we can login our user
 
-  login_user($login);
+  login_user($user_data);
   header("location: ../index.php");
 
 } else {

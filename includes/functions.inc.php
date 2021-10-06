@@ -57,8 +57,9 @@ function sign_up_user(mysqli $conn, $name,$login,$password) {
   $stmt->execute();
 }
 
-function login_user($login) {
+function login_user($data) {
   session_start();
   $_SESSION["loggedin"] = true;
-  $_SESSION["login"] = $login;
+  $_SESSION["login"] = $data["login"];
+  $_SESSION["name"] = $data["name"];
 }
