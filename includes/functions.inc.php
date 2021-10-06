@@ -4,7 +4,7 @@
 
 function some_are_missing(...$args) {
   foreach($args as $arg)
-    if(empty($arg)) return true;
+    if(empty(trim($arg))) return true;
   return false;
 }
 
@@ -17,6 +17,8 @@ function invalid_login($login) {
 }
 
 function invalid_password($password) {
+  if(strlen($password) < 8)
+    return true;
   $upper = preg_match('/[A-Z]/', $password);
   $lower = preg_match('/[a-z]/', $password);
   $number = preg_match('/[0-9]/', $password);
@@ -53,4 +55,10 @@ function sign_up_user(mysqli $conn, $name,$login,$password) {
   $stmt = $conn->prepare($sql);
   $stmt->bind_param("sss", $name,$login,$hashed_pwd);
   $stmt->execute();
+}
+
+function login_user($login) {
+  session_start();
+  $_SESSION["loggedin"] = true;
+  $_SESSION["login"] = $login;
 }
