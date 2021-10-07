@@ -17,13 +17,12 @@
         <ul class="nav">
           <li><a href="index.php">О проекте</a></li>
           <li><a href="#">Посты</a></li>
-          <li><a href="#">Участники</a></li>
+          <li><a href="members.php">Участники</a></li>
           <?php if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) { ?>
           <li><a href="profile.php">Мой профиль</a></li>
           <?php } else { ?>
           <li><a href="login.php">Войти</a></li>
           <?php }?>
-          </a></li>
         </ul>
       </nav>
     </header>
