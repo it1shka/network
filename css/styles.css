@@ -42,6 +42,10 @@ a:not(:hover) {
   color: var(--spec-color); 
 }
 
+input, textarea {
+  font-family: 'Balsamiq Sans', cursive;
+}
+
 /* HEADER */
 
 .header {
@@ -143,4 +147,25 @@ a:not(:hover) {
 
 .pag-row > p {
   width: 50%;
+}
+
+.pag-link {
+  text-decoration: none;
+  color: initial;
+}
+
+.pag-link:hover {
+  text-decoration: none;
+}
+
+/* POST */
+
+.post {
+  position: relative;
+}
+
+.post > a {
+  position: absolute;
+  top: 0.75em;
+  left: 0.75em;
 }

@@ -2,7 +2,7 @@
 
 <?php
 
-  define("USERS_PER_PAGE", 5);
+  define("USERS_PER_PAGE", 15);
   function count_users(mysqli $conn) {
     $sql = "select count(*) from users;";
     $result = $conn->query($sql);
@@ -45,7 +45,7 @@
   foreach($users as $user) {
     $name = $user["name"];
     $login = $user["login"];
-    echo "<li class=\"hovered pag-row\"><p>$name</p> <p>@$login</p></li>";
+    echo "<a class=\"pag-link\" href=\"#\"><li class=\"hovered pag-row\"><p>$name</p> <p>@$login</p></li></a>";
   }
   echo "</ul></section>";
 

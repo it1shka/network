@@ -16,6 +16,8 @@ define("ERRORS", array(
   "wrongpassword" => "Ой-ой... Пароль, который вы ввели, неверный!",
   "logout" => "Похоже, вы вышли из аккаунта... придётся зайти снова!",
   "accdeleted" => "Вы удалили свой аккаунт (зачем?). Создайте новый, что-ли...",
+  "mustbeloggedin" => "Чтобы запостить, нужно быть авторизованным",
+  "postsuccess" => "Успешно запощено!",
   "success" => "Поздравляем! У вас получилось зарегистрироваться!"
 ));
 
@@ -24,6 +26,6 @@ function get_error_desc(string $error) {
   if(array_key_exists($error, ERRORS)) {
     $error_desc = ERRORS[$error];
   }
-  $color = ($error == "success") ? "green" : "red" ;
+  $color = ($error == "success" || $error == "postsuccess") ? "green" : "red" ;
   return "<span style=\"color: $color\">$error_desc</span>";
 }
