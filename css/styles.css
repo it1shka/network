@@ -49,6 +49,11 @@ input, textarea {
 /* HEADER */
 
 .header {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  background-color: white;
+
   display: flex;
   align-items: center;
   padding: 0.25em 1em;
@@ -162,11 +167,11 @@ input, textarea {
 
 .post {
   position: relative;
-  padding: 3em 5em;
+  padding: 1em 4em;
 }
 
-.post > a {
+.post__info {
   position: absolute;
-  top: 0.75em;
-  left: 0.75em;
+  bottom: 0.75em;
+  right: 0.75em;
 }

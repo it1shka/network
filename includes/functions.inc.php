@@ -66,6 +66,7 @@ function login_user($data) {
 
 // additional functions
 
+/*
 function db_count(mysqli $conn, $dbname) {
   $sql = "select count(*) from $dbname;";
   $result = $conn->query($sql);
@@ -79,15 +80,39 @@ function db_grab(mysqli $conn, $dbname, $start, $amount) {
   $results = $result->fetch_all(MYSQLI_ASSOC);
   return $results;
 }
+*/
+
+function db_count(mysqli $conn, $sql) {
+  $result = $conn->query($sql);
+  $total = ($result->fetch_array())[0];
+  return $total;
+}
+
+function db_grab(mysqli $conn, $sql) {
+  $result = $conn->query($sql);
+  $results = $result->fetch_all(MYSQLI_ASSOC);
+  return $results;
+}
 
 function render_post($post) {
   $title = $post["title"];
   $message = $post["message"];
   $author_login = $post["author_login"];
   $author_name = $post["author_name"];
+
+  $timestr = $post["postdate"];
+  $time = new DateTime($timestr);
+  $diff = (new DateTime)->diff($time)->days;
+
   echo "<section class=\"section post\">";
-  echo "<a href=\"#\">$author_name @$author_login</a>";
-  echo "<h2>$title</h2>";
+  echo "<span class=\"post__info\">";
+  echo "By $author_name <a href=\"userprofile.php?userlogin=$author_login\">@$author_login</a>, ";
+  if($diff > 0)
+    echo "$diff days ago";
+  else
+    echo "Today";
+  echo "</span>";
+  echo "<h2 style=\"color: var(--spec-color);\">$title</h2>";
   echo "<p>$message</p>";
   echo "</section>";
 }

@@ -15,7 +15,7 @@
 
 <?php
 include "includes/db.inc.php";
-$count = db_count($conn, "users");
+$count = db_count($conn, "select count(*) from users;");
 if($start >= $count || $start < 0) {
   echo "<h1>Упс... Здесь пусто...</h1>";
   exit();
@@ -23,12 +23,16 @@ if($start >= $count || $start < 0) {
 
 // rendering users... 
 
-$users = db_grab($conn, "users", $start, USERS_PER_PAGE);
+$users = db_grab($conn, "select * from users limit $start, " . USERS_PER_PAGE . ";");
 echo "<section><ul class=\"section\">";
 foreach($users as $user) {
   $name = $user["name"];
   $login = $user["login"];
-  echo "<a class=\"pag-link\" href=\"#\"><li class=\"hovered pag-row\"><p>$name</p> <p>@$login</p></li></a>";
+  echo "<a class=\"pag-link\" href=\"userprofile.php?userlogin=$login\"><li class=\"hovered pag-row\">";
+  if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION["login"] == $login)
+    echo "<p>$name</p> <p>@$login (Это вы)</p>";
+  else echo "<p>$name</p> <p>@$login</p>";
+  echo "</li></a>";
 }
 echo "</ul></section>";
 

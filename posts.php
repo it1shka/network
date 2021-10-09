@@ -19,14 +19,14 @@ $start = $page * POSTS_PER_PAGE;
 <?php
 
 include "includes/db.inc.php";
-$count = db_count($conn, "posts");
+$count = db_count($conn, "select count(*) from posts;");
 if($start >= $count || $start < 0) {
   echo "<section class=\"section hovered\"><h1>Упс... Здесь пусто...</h1></section>";
   exit();
 }
 
-$posts = db_grab($conn, "posts", $start, POSTS_PER_PAGE);
-foreach($posts as $post) {
+$posts = db_grab($conn, "select * from posts limit $start, " . POSTS_PER_PAGE . ";");
+foreach(array_reverse($posts) as $post) {
   render_post($post);
 }
 
