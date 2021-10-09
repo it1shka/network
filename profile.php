@@ -1,7 +1,5 @@
 <?php include_once "header.php" ?>
 
-<div class="container">
-<main>
 <?php if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true): ?>
   <section class="section hovered">
     <h1>Гостевой режим</h1>
@@ -21,7 +19,5 @@
     <div><a href="includes/deleteacc.inc.php">Удалить аккаунт</a>.</div>
   </section>
 <?php endif; ?>
-</main>
-</div>
 
 <?php include_once "footer.php" ?>

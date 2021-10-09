@@ -1,8 +1,5 @@
 <?php include_once "header.php" ?>
 
-<div class="container">
-<main>
-
 <?php if(empty($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true): ?>
 <section class="section hovered">
   <h1>Вы гость</h1>
@@ -33,18 +30,5 @@
 </form>
 </section>
 <?php endif; ?>
-
-<?php if(isset($_GET["error"])): ?>
-<section class="section">
-<?php
-  include_once "includes/errors.inc.php";
-  $error = get_error_desc($_GET["error"]);
-  echo $error;
-?>
-</section>
-<?php endif; ?>
-
-</main>
-</div>
 
 <?php include_once "footer.php" ?>

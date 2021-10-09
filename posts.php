@@ -9,9 +9,6 @@ $start = $page * POSTS_PER_PAGE;
 
 ?>
 
-<div class="container">
-<main>
-
 <?php if($_SESSION["loggedin"]): ?>
 <section class="section hovered">
   <h3>Вы вошли как @<?=$_SESSION["login"]?></h3>
@@ -36,8 +33,5 @@ foreach($posts as $post) {
 render_pagination($page, POSTS_PER_PAGE, $count, "posts");
 
 ?>
-
-</main>
-</div>
 
 <?php include_once "footer.php" ?>
