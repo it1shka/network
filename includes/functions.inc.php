@@ -63,3 +63,41 @@ function login_user($data) {
   $_SESSION["login"] = $data["login"];
   $_SESSION["name"] = $data["name"];
 }
+
+// additional functions
+
+function db_count(mysqli $conn, $dbname) {
+  $sql = "select count(*) from $dbname;";
+  $result = $conn->query($sql);
+  $total = ($result->fetch_array())[0];
+  return $total;
+}
+
+function db_grab(mysqli $conn, $dbname, $start, $amount) {
+  $sql = "select * from $dbname limit $start, $amount";
+  $result = $conn->query($sql);
+  $results = $result->fetch_all(MYSQLI_ASSOC);
+  return $results;
+}
+
+function render_post($post) {
+  $title = $post["title"];
+  $message = $post["message"];
+  $author_login = $post["author_login"];
+  $author_name = $post["author_name"];
+  echo "<section class=\"section post\">";
+  echo "<a href=\"#\">$author_name @$author_login</a>";
+  echo "<h2>$title</h2>";
+  echo "<p>$message</p>";
+  echo "</section>";
+}
+
+function render_pagination($page, $per_page, $count, $link) {
+  echo "<ul class=\"section pagination\">Страницы:";
+  for($current_page = $page - 2; $current_page <= $page + 2; $current_page++) {
+    $current_start = $current_page * $per_page;
+    if($current_start < 0 || $current_start >= $count) continue;
+    echo "<li><a href=\"$link.php?page=$current_page\">$current_page</a></li>";
+  }
+  echo "</ul>";
+}

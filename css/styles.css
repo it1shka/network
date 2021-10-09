@@ -162,6 +162,7 @@ input, textarea {
 
 .post {
   position: relative;
+  padding: 3em 5em;
 }
 
 .post > a {
