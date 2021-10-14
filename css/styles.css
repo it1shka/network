@@ -175,3 +175,8 @@ input, textarea {
   bottom: 0.75em;
   right: 0.75em;
 }
+
+.comments {
+  overflow-y: scroll;
+  height: 400px;
+}

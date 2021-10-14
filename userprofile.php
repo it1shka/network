@@ -1,23 +1,20 @@
 <?php include_once "header.php" ?>
 
 <?php
-function exit_with_error($error) {
-  header("location: members.php?error=$error");
-  exit();
-}
+
+require_once "includes/functions.inc.php";
 
 $userlogin = $_GET["userlogin"];
 if(empty($userlogin) && $_SESSION["loggedin"] === true)
   $userlogin = $_SESSION["login"];
 if(empty($userlogin))
-  exit_with_error("emptyuser");
+  exit_with_error("emptyuser", "members.php");
 
 require_once "includes/db.inc.php";
-require_once "includes/functions.inc.php";
 
 $user_info = pull_user_info_by_login($conn, $userlogin);
 if(empty($user_info))
-  exit_with_error("invaliduser");
+  exit_with_error("invaliduser", "members.php");
 ?>
 
 <section class="section">

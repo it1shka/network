@@ -1,12 +1,7 @@
 <?php
 session_start();
 
-function delete_account(mysqli $conn, $login) {
-  $sql = "delete from users where login = ?;";
-  $stmt = $conn->prepare($sql);
-  $stmt->bind_param("s", $login);
-  $stmt->execute();
-}
+require_once "functions.inc.php";
 
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && isset($_SESSION["login"])) {
   include_once "db.inc.php";

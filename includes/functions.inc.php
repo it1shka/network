@@ -64,6 +64,13 @@ function login_user($data) {
   $_SESSION["name"] = $data["name"];
 }
 
+function delete_account(mysqli $conn, $login) {
+  $sql = "delete from users where login = ?;";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("s", $login);
+  $stmt->execute();
+}
+
 // additional functions
 
 /*
@@ -94,7 +101,16 @@ function db_grab(mysqli $conn, $sql) {
   return $results;
 }
 
+function add_post(mysqli $conn,$title,$message,$auth_login,$auth_name) {
+  $sql = "insert into posts(author_login,author_name,title,message)
+  values (?, ?, ?, ?)";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("ssss",$auth_login,$auth_name,$title,$message);
+  $stmt->execute();
+}
+
 function render_post($post) {
+  $id = $post["id"];
   $title = $post["title"];
   $message = $post["message"];
   $author_login = $post["author_login"];
@@ -112,7 +128,7 @@ function render_post($post) {
   else
     echo "Today";
   echo "</span>";
-  echo "<h2 style=\"color: var(--spec-color);\">$title</h2>";
+  echo "<h2><a href=\"post.php?postid=$id\">$title</a></h2>";
   echo "<p>$message</p>";
   echo "</section>";
 }
@@ -125,4 +141,40 @@ function render_pagination($page, $per_page, $count, $link) {
     echo "<li><a href=\"$link.php?page=$current_page\">$current_page</a></li>";
   }
   echo "</ul>";
+}
+
+function exit_with_error($error, $location) {
+  header("location: $location?error=$error");
+  exit();
+}
+
+function grab_post_with_id(mysqli $conn, $id) {
+  $sql = "select * from posts where id = ?";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("i", $id);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  return $result->fetch_assoc();
+}
+
+function grab_comments_with_id(mysqli $conn, $id) {
+  $sql = "select * from comments where post_id = ?";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("i", $id);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+function render_comment($comment) {
+  $name = $comment["author_name"];
+  $message = $comment["message"];
+  echo "<p>$name: $message</p>";
+}
+
+function add_comment(mysqli $conn, $post_id, $author_name, $message) {
+  $sql = "insert into comments values(?, ?, ?)";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("iss", $post_id, $author_name, $message);
+  $stmt->execute();
 }
